@@ -25,7 +25,7 @@ echo "Welcome To Flip Coin Combination Program"
 
 echo "            "
 
-declare -A flip_check
+declare -A flip_check_singlet
 declare -A percent_singlet_dict
 
 isHeads=1
@@ -42,13 +42,13 @@ do
 	fi
 done
 
-flip_check[Heads]=$count_heads
+flip_check_singlet[Heads]=$count_heads
 
-flip_check[Tails]=$count_tails
+flip_check_singlet[Tails]=$count_tails
 
-echo "Heads:${flip_check[Heads]}"
+echo "Heads:${flip_check_singlet[Heads]}"
 
-echo "Tails:${flip_check[Tails]}"
+echo "Tails:${flip_check_singlet[Tails]}"
 
 echo "            "
 
