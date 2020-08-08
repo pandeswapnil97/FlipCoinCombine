@@ -301,6 +301,9 @@ max_triplet_key=""
 max_triplet_value=0
 
 
+winning_combine_array_counter=0
+
+
 #For Singlet Combination
 
 
@@ -491,6 +494,8 @@ do
         fi
 done
 
+
+
 echo "In Singlet Combination, Following events are having maximum percentage as $max_singlet_value"
 
 for k in "${!percent_singlet_dict[@]}"
@@ -498,6 +503,8 @@ do
         if [ $max_singlet_value -eq ${percent_singlet_dict[$k]} ]
         then
                 echo $k
+		winning_combine_key[((winning_combine_array_counter++))]=$k
+		winning_combine_value[((winning_combine_array_counter++))]=$max_singlet_value
         fi
 done
 
@@ -516,6 +523,8 @@ do
         fi
 done
 
+
+
 echo "        "
 
 echo "In Doublet Combination, Following events are having maximum percentage as $max_doublet_value"
@@ -525,6 +534,8 @@ do
         if [ $max_doublet_value -eq ${percent_doublet_dict[$k]} ]
         then
                 echo $k
+		winning_combine_key[((winning_combine_array_counter++))]=$k
+                winning_combine_value[((winning_combine_array_counter++))]=$max_doublet_value
         fi
 done
 
@@ -553,5 +564,26 @@ do
 	if [ $max_triplet_value -eq ${percent_triplet_dict[$k]} ]
         then
 		echo $k
+		winning_combine_key[((winning_combine_array_counter++))]=$k
+                winning_combine_value[((winning_combine_array_counter++))]=$max_triplet_value
+
 	fi
 done
+
+
+winning_combination_key=0
+winning_combination_max_value=${winning_combine_value[0]}
+
+for((i=0;i<${#winning_combine_value[@]};i++))
+do
+	if [ $winning_combination_max_value -le ${winning_combine_value[(i++)]} ]
+        then
+		winning_combination_key=${winning_combine_key[i]}
+		winning_combination_max_value=${winning_combine_value[(i++)]}
+	fi
+done
+
+
+echo "      "
+echo "Combination ${winning_combine_key[$winning_combination_key]} is having maximum percentage:"
+echo $winning_combination_max_value
